@@ -5,6 +5,6 @@ int add(int a, int b){
 }
 
 int main(){
-    assert(add(3, 2) == 5)
+    assert(add(3, 2) == 5);
 }
 
