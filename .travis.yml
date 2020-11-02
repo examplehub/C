@@ -1,7 +1,6 @@
 language: c
 script:
-  - cmake -B ./build -S .
-  - cmake --build ./build
+  - cmake -B ./build -S . && cmake --build ./build
 
 notifications:
   webhooks: https://www.travisbuddy.com/
