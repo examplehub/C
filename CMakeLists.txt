@@ -7,5 +7,6 @@ set(CMAKE_C_STANDARD 99)
 add_subdirectory(maths)
 add_subdirectory(sorts)
 add_subdirectory(strings)
+add_subdirectory(searches)
 
 add_executable(C main.c)
