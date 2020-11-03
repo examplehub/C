@@ -9,5 +9,6 @@ add_subdirectory(sorts)
 add_subdirectory(strings)
 add_subdirectory(searches)
 add_subdirectory(projecteuler)
+add_subdirectory(dynamicprogramming)
 
 add_executable(C main.c)
