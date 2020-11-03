@@ -1,7 +1,6 @@
 #include <stdbool.h>
 #include <assert.h>
 #include <string.h>
-#include <math.h>
 
 /**
  * Convert binary string to decimal number.
@@ -13,7 +12,12 @@ int toBinary(char *binary) {
     bool isNegative = binary[0] == '-';
     int k = isNegative ? (int) strlen(binary) - 1 : (int) strlen(binary);
     for (int i = isNegative ? 1 : 0; binary[i] != '\0'; ++i) {
-        sum += (binary[i] - '0') * (int) pow(2, --k);
+        --k;
+        int power = 1;
+        for (int j = 1; j <= k; j++) {
+            power *= 2;
+        }
+        sum += (binary[i] - '0') * power;
     }
     return isNegative ? -sum : sum;
 }
