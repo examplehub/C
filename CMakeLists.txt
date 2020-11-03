@@ -4,11 +4,12 @@ project(Examples C)
 
 set(CMAKE_C_STANDARD 99)
 
+add_subdirectory(conversions)
+add_subdirectory(dynamicprogramming)
 add_subdirectory(maths)
 add_subdirectory(sorts)
 add_subdirectory(strings)
 add_subdirectory(searches)
 add_subdirectory(projecteuler)
-add_subdirectory(dynamicprogramming)
 
 add_executable(C main.c)
