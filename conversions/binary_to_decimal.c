@@ -2,7 +2,6 @@
 #include <assert.h>
 #include <string.h>
 #include <math.h>
-#include <stdio.h>
 
 /**
  * Convert binary string to decimal number.
