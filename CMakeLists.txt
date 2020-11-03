@@ -4,6 +4,7 @@ project(Examples C)
 
 set(CMAKE_C_STANDARD 99)
 
+add_subdirectory(ciphers)
 add_subdirectory(conversions)
 add_subdirectory(dynamicprogramming)
 add_subdirectory(maths)
