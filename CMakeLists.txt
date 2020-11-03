@@ -8,5 +8,6 @@ add_subdirectory(maths)
 add_subdirectory(sorts)
 add_subdirectory(strings)
 add_subdirectory(searches)
+add_subdirectory(projecteuler)
 
 add_executable(C main.c)
