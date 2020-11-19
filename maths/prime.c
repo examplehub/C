@@ -19,7 +19,7 @@ bool isPrime(int number) {
         return false;
     }
 
-    for (int i = 3, limit = (int) sqrt(number); i <= limit; i += 2) {
+    for (int i = 3, limit = (int) sqrtl(number); i <= limit; i += 2) {
         if (number % i == 0) {
             return false;
         }
