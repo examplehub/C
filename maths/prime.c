@@ -1,6 +1,6 @@
 #include <stdbool.h>
 #include <assert.h>
-#include <math.h>
+#include <math.h> -lm
 
 bool isPrime(int number) {
 
