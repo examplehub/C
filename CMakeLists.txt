@@ -4,8 +4,6 @@ project(Examples C)
 
 set(CMAKE_C_STANDARD 99)
 
-find_library(MATH_LIBRARY m)
-
 add_subdirectory(ciphers)
 add_subdirectory(conversions)
 add_subdirectory(dynamicprogramming)
