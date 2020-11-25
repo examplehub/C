@@ -8,6 +8,6 @@ foreach( testsourcefile ${APP_SOURCES} )
     # I used a simple string replace, to cut off .cpp.
     string( REPLACE ".c" "" testname ${testsourcefile} )
     add_executable( ${testname} ${testsourcefile} )
-    install(TARGETS ${testname} DESTINATION "bin/stack")
+    install(TARGETS ${testname} DESTINATION "bin/queue")
 
 endforeach( testsourcefile ${APP_SOURCES} )
