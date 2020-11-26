@@ -11,12 +11,14 @@
 int search(const int *arr, int key, int low, int high) {
     if (low > high) {
         return -1;
-    } else if (arr[low] == key) {
-        return low;
-    } else if (arr[high] == key) {
-        return high;
+    }
+    int mid = (low + high) / 2;
+    if (key == arr[mid]) {
+        return mid;
+    } else if (key > arr[mid]) {
+        return search(arr, key, mid + 1, high);
     } else {
-        return search(arr, key, low + 1, high - 1);
+        return search(arr, key, 0, mid - 1);
     }
 }
 
