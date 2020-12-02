@@ -56,6 +56,13 @@ bool push(Stack *pStack, ElemType elem){
     return true;
 }
 
+ElemType peek(Stack stack) {
+    if (isEmpty(stack)) {
+        perror("can't peek from empty stack.");
+    }
+    return stack.base[stack.top];
+}
+
 void test() {
     Stack stack;
     initStack(&stack);
@@ -65,6 +72,7 @@ void test() {
     for (int i = 1; i <= 5; ++i) {
         push(&stack, i);
     }
+    assert(peek(stack) == 5);
     assert(length(stack) == 5);
     for (int i = 5; i >= 1; --i) {
         assert(pop(&stack) == i);
