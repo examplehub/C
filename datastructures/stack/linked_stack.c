@@ -77,6 +77,18 @@ ElemType pop(LinkedStack *pStack) {
 }
 
 /**
+ * Return the element at the top of stack.
+ * @param stack the stack.
+ * @return top element of stack.
+ */
+ElemType peek(LinkedStack stack) {
+    if (stack.size == 0) {
+        perror("Can't peek from empty stack");
+    }
+    return stack.top->data;
+}
+
+/**
  * Print stack elements.
  * @param stack the stack to be printed.
  */
@@ -99,6 +111,7 @@ void test() {
         push(&linkedStack, i);
     }
     printStack(linkedStack); /* output: 5	4	3	2	1 */
+    assert(peek(linkedStack) == 5);
 
     for (int i = 5; i >= 1; --i) {
         assert(pop(&linkedStack) == i);
