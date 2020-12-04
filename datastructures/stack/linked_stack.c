@@ -37,7 +37,7 @@ bool isEmpty(LinkedStack stack) {
  * @param stack the stack contains elements.
  * @return the number of elements at the stack.
  */
-bool size(LinkedStack stack) {
+int size(LinkedStack stack) {
     return stack.size;
 }
 
@@ -109,11 +109,15 @@ void test() {
 
     for (int i = 1; i <= 5; ++i) {
         push(&linkedStack, i);
+        assert(size(linkedStack) == i);
     }
     printStack(linkedStack); /* output: 5	4	3	2	1 */
+    assert(size(linkedStack) == 5);
     assert(peek(linkedStack) == 5);
 
     for (int i = 5; i >= 1; --i) {
+        assert(size(linkedStack) == i);
+        assert(peek(linkedStack) == i);
         assert(pop(&linkedStack) == i);
     }
 
