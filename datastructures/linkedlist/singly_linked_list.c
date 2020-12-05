@@ -117,10 +117,9 @@ ElemType deleteTail(SinglyLinkedList *pList) {
 
 /**
  * Reverse given SinglyLinkedList
- * @param list the list to be reversed.
- * @return reversed SinglyLinkedList
+ * @param plist the pointer of list to be reversed.
  */
-SinglyLinkedList reverse(SinglyLinkedList *plist) {
+void reverse(SinglyLinkedList *plist) {
     Node *prev = NULL;
     Node *current = plist->head;
     Node *next = NULL;
