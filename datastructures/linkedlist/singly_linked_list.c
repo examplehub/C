@@ -10,24 +10,45 @@ typedef struct Node {
 } Node;
 
 typedef struct SinglyLinkedList {
-    Node *head;
-    Node *tail;
-    int length;
+    Node *head; /* the head pointer of SinglyLinkedList */
+    Node *tail; /* the tail pointer of SinglyLinkedList */
+    int length; /* the number of elements of SinglyLinkedList */
 } SinglyLinkedList;
 
+/**
+ * Initialize SinglyLinkedList.
+ * @param list the list to be initialized.
+ */
 void init(SinglyLinkedList *list) {
     list->length = 0;
     list->head = list->tail = NULL;
 }
 
+/**
+ * Test if SinglyLinkedList is empty or not.
+ * @param list the list to be tested.
+ * @return true if SinglyLinkedList is empty, otherwise false.
+ */
 bool isEmpty(SinglyLinkedList list) {
     return list.length == 0;
 }
 
+/**
+ * Return the length of SinglyLinkedList.
+ * @param list the list to be calculated.
+ * @return the length of SinglyLinkedList.
+ */
 int length(SinglyLinkedList list) {
     return list.length;
 }
 
+/**
+ * Insert element to the special position of SinglyLinkedList.
+ * @param pList the list contains elements.
+ * @param index the index to be inserted.
+ * @param elem the element to be inserted.
+ * @return true if inserted successfully, otherwise false.
+ */
 bool insertAt(SinglyLinkedList *pList, int index, ElemType elem) {
     if (index < 0 || index > pList->length) {
         perror("invalid insertion index.");
@@ -63,7 +84,7 @@ bool insertTail(SinglyLinkedList *pList, ElemType elem) {
     return insertAt(pList, pList->length, elem);
 }
 
-ElemType deleteAt(SinglyLinkedList *pList, int index){
+ElemType deleteAt(SinglyLinkedList *pList, int index) {
     if (index < 0 || index > pList->length - 1) {
         perror("invalid delete index.");
     }
@@ -90,11 +111,29 @@ ElemType deleteHead(SinglyLinkedList *pList) {
     return deleteAt(pList, 0);
 }
 
-ElemType deleteTail(SinglyLinkedList *pList){
+ElemType deleteTail(SinglyLinkedList *pList) {
     return deleteAt(pList, pList->length - 1);
 }
 
-void printLinkedList(SinglyLinkedList list){
+/**
+ * Reverse given SinglyLinkedList
+ * @param list the list to be reversed.
+ * @return reversed SinglyLinkedList
+ */
+SinglyLinkedList reverse(SinglyLinkedList *plist) {
+    Node *prev = NULL;
+    Node *current = plist->head;
+    Node *next = NULL;
+    while (current != NULL) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    plist->head = prev;
+}
+
+void printLinkedList(SinglyLinkedList list) {
     Node *temp = list.head;
     for (int i = 0; i < list.length; ++i) {
         printf("%d\t", temp->data);
@@ -121,6 +160,9 @@ void test() {
     assert(deleteHead(&list) == 0);
     assert(deleteTail(&list) == 5);
     printLinkedList(list); /* 1 2 4 */
+
+    reverse(&list);
+    printLinkedList(list); /* 4 2 1 */
 
 }
 
