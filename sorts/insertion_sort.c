@@ -7,13 +7,11 @@ void insertionSort(int *array, int length) {
     for (int i = 1; i < length; i++) {
         int j = i - 1;
         int key = array[i];
-        bool moved = false;
         while (j >= 0 && key < array[j]) {
             array[j + 1] = array[j];
             j--;
-            moved = true;
         }
-        if (!moved) {
+        if (j != i - 1) {
             array[j + 1] = key;
         }
     }
