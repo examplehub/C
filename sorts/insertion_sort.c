@@ -7,8 +7,8 @@ void insertionSort(int *array, int length) {
     for (int i = 1; i < length; i++) {
         int key = array[i];
         int j;
-        for (j = i - 1; j >= 0 && key < arr[j]; j--) {
-            arr[j + 1] = arr[j];
+        for (j = i - 1; j >= 0 && key < array[j]; j--) {
+            array[j + 1] = array[j];
         }
         if (j != i - 1) {
             array[j + 1] = key;
