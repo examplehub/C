@@ -5,11 +5,10 @@
 
 void insertionSort(int *array, int length) {
     for (int i = 1; i < length; i++) {
-        int j = i - 1;
         int key = array[i];
-        while (j >= 0 && key < array[j]) {
-            array[j + 1] = array[j];
-            j--;
+        int j;
+        for (j = i - 1; j >= 0 && key < arr[j]; j--) {
+            arr[j + 1] = arr[j];
         }
         if (j != i - 1) {
             array[j + 1] = key;
