@@ -21,6 +21,9 @@ void bubbleSort(int *arr, int length) {
             swapped = true;
         }
     }
+    if (!swapped) {
+        return;
+    }
     bubbleSort(arr, length - 1);
 }
 
