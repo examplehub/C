@@ -3,16 +3,16 @@
 #include <time.h>
 
 int partition(int *arr, int low, int high) {
-    int pivot = arr[high];
+    int pivot = arr[low];
     while (low < high) {
-        while (low < high && arr[low] <= pivot) {
-            low++;
-        }
-        arr[high] = arr[low];
         while (low < high && arr[high] >= pivot) {
             high--;
         }
         arr[low] = arr[high];
+        while (low < high && arr[low] <= pivot) {
+            low++;
+        }
+        arr[high] = arr[low];
     }
     arr[low] = pivot;
     return low;
