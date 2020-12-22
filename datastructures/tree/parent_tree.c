@@ -25,7 +25,7 @@ void initTree(PTree *pTree, int size) {
     }
 }
 
-void printTree(PTree tree) {
+void printTree(const PTree tree) {
     printf("index\tvalue\tp_index\tp_value\n");
     for (int i = 0; i < tree.size; ++i) {
         printf("%d\t%c\t%d\t%c\n", i, tree.nodes[i].data,
