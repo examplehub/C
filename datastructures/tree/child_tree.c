@@ -47,7 +47,7 @@ void initTree(CTree *pTree, int size) {
     }
 }
 
-void printTree(CTree tree) {
+void printTree(const CTree tree) {
     for (int i = 0; i < tree.size; ++i) {
         printf("Parent node: %c\t", tree.nodes[i].data);
         printf("Child nodes: ");
