@@ -1,16 +1,13 @@
 #include <assert.h>
 
 /**
- * Return the first digit of a number.
+ * Return the first digit of a number using recursion.
  * @param number the number to be calculated.
  * @return the first digit of given number.
  */
 int firstDigit(int number) {
     number = number < 0 ? -number : number;
-    while (number >= 10) {
-        number /= 10;
-    }
-    return number;
+    return number < 10 ? number : firstDigit(number / 10);
 }
 
 void test() {
