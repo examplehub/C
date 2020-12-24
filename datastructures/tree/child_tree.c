@@ -47,13 +47,13 @@ void initTree(CTree *pTree, int size) {
     }
 }
 
-void printTree(const CTree tree) {
-    for (int i = 0; i < tree.size; ++i) {
-        printf("Parent node: %c\t", tree.nodes[i].data);
+void printTree(const CTree *pTree) {
+    for (int i = 0; i < pTree->size; ++i) {
+        printf("Parent node: %c\t", pTree->nodes[i].data);
         printf("Child nodes: ");
-        CTNode *temp = tree.nodes[i].firstChild;
+        CTNode *temp = pTree->nodes[i].firstChild;
         while (temp != NULL) {
-            printf("%c\t", tree.nodes[temp->child].data);
+            printf("%c\t", pTree->nodes[temp->child].data);
             temp = temp->next;
         }
         printf("\n");
@@ -66,7 +66,7 @@ void test() {
     int size;
     scanf("%d", &size);
     initTree(&tree, size);
-    printTree(tree);
+    printTree(&tree);
 }
 
 int main() {
