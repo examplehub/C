@@ -25,11 +25,11 @@ void initTree(PTree *pTree, int size) {
     }
 }
 
-void printTree(const PTree tree) {
+void printTree(const PTree *pTree) {
     printf("index\tvalue\tp_index\tp_value\n");
-    for (int i = 0; i < tree.size; ++i) {
-        printf("%d\t%c\t%d\t%c\n", i, tree.nodes[i].data,
-               tree.nodes[i].parent, tree.nodes[tree.nodes[i].parent].data);
+    for (int i = 0; i < pTree->size; ++i) {
+        printf("%d\t%c\t%d\t%c\n", i, pTree->nodes[i].data,
+               pTree->nodes[i].parent, pTree->nodes[pTree->nodes[i].parent].data);
     }
 }
 
@@ -39,7 +39,7 @@ void test() {
     printf("Input the number of nodes of tree:");
     scanf("%d", &size);
     initTree(&tree, size);
-    printTree(tree);
+    printTree(&tree);
 }
 
 int main() {
