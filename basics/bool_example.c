@@ -7,9 +7,12 @@ void test() {
     flag = !flag;
     assert(!flag);
 
-    int number = -3;
-    bool isNegative = number < 0;
-    number = isNegative ? -number : number;
+    int sum = 0;
+    for (int i = -3; i <= 2; i++) {
+        sum += i;
+    }
+    bool isNegative = sum < 0;
+    int number = isNegative ? -sum : sum;
     assert(number == 3);
 }
 
