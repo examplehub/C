@@ -1,7 +1,7 @@
 #include <assert.h>
 
 /**
- * Calculate the greatest common divisor of two numbers.
+ * Calculate the greatest common divisor of two numbers using recursion.
  * @param a the first number.
  * @param b the second number.
  * @return the greatest common divisor of given two numbers.
@@ -9,14 +9,9 @@
 int gcd(int a, int b) {
     if (a == 0 || b == 0) {
         return a == 0 ? b : a;
+    } else {
+        return gcd(b, a % b);
     }
-    int t = 1;
-    while (t != 0) {
-        t = a % b;
-        a = b;
-        b = t;
-    }
-    return a;
 }
 
 void test() {
