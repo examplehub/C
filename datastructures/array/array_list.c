@@ -194,6 +194,35 @@ void destroy(ArrayList *plist) {
     free(plist->base);
 }
 
+/**
+ * Merge two sorted list.
+ * @param plistA the first sorted list.
+ * @param plistB the second sorted list.
+ * @param plistC the sorted list after merged.
+ */
+void merge(ArrayList *plistA, ArrayList *plistB, ArrayList *plistC) {
+    int pa = 0;
+    int pb = 0;
+    int pc = 0;
+    while (pa < plistA->size && pb < plistB->size) {
+        if (plistA->base[pa] <= plistB->base[pb]) {
+            plistC->base[pc++] = plistA->base[pa++];
+        } else {
+            plistC->base[pc++] = plistB->base[pb++];
+        }
+    }
+
+    while (pa < plistA->size) {
+        plistC->base[pc++] = plistA->base[pa++];
+    }
+
+    while (pb < plistB->size) {
+        plistC->base[pc++] = plistB->base[pb++];
+    }
+
+    plistC->size = plistA->size + plistB->size;
+}
+
 void test() {
     ArrayList list;
     init(&list);
@@ -221,7 +250,30 @@ void test() {
     destroy(&list);
 }
 
+void testMerge()
+{
+    ArrayList listA;
+    ArrayList listB;
+    init(&listA);
+    init(&listB);
+    for (int i = 1, j = 0; i <= 10; i += 2, j++) {
+        insertNth(&listA, j, i);
+        insertNth(&listB, j, i + 1);
+    }
+    travel(listA); /* output: 1	3	5	7	9 */
+    travel(listB); /* output: 2	4	6	8	10 */
+
+    ArrayList listC;
+    init(&listC);
+    merge(&listA, &listB, &listC);
+    travel(listC); /* output: 1	   2	3	4	5	6	7	8	9	10 */
+    for (int i = 0; i < listC.size - 1; ++i) {
+        assert(get(listC, i) <= get(listC, i + 1));
+    }
+}
+
 int main() {
     test();
+    testMerge();
     return 0;
 }
