@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include <stdbool.h>
 
 typedef int ElemType;
 typedef struct Node {
@@ -12,17 +11,22 @@ typedef struct Node {
     struct Node *next;
 } Node;
 
+/**
+ * Create header of SinglyLinkedList.
+ * @return header pointer of SinglyLinkedList.
+ */
 Node *init() {
-    Node *root = malloc(sizeof(Node));
-    root->next = NULL;
-    root->length = 0;
-    return root;
+    Node *header = malloc(sizeof(Node));
+    if (header != NULL) {
+        header->next = NULL;
+        header->length = 0;
+    }
+    return header;
 }
 
 void insertOrder(Node *root, ElemType elem) {
     Node *newNode = malloc(sizeof(Node));
     newNode->data = elem;
-    newNode->next = NULL;
     Node *temp = root;
     while (temp != NULL && temp->next != NULL && elem > temp->next->data) {
         temp = temp->next;
@@ -66,7 +70,7 @@ ElemType deleteNth(Node *root, int index) {
 
 void printSinglyLinkedList(Node *root) {
     Node *temp = root->next;
-    for (int i = 0; i < root->length; ++i) {
+    for (int i = 1; i <= root->length; ++i) {
         printf("%d\t", temp->data);
         temp = temp->next;
     }
@@ -80,6 +84,10 @@ void test() {
     }
     for (int i = 0; i <= 4; i += 2) {
         insertOrder(root, i);
+    }
+    Node *temp = root->next;
+    for (int i = 1; i <= root->length - 1; ++i) {
+        assert(temp->data <= temp->next->data);
     }
     printSinglyLinkedList(root); /* output: 0	1	2	3	4	5 */
 
