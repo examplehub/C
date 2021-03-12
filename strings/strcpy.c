@@ -1,26 +1,21 @@
 #include <assert.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
-int length(const char *str) {
-    int count = 0;
-    for (int i = 0; str[i] != '\0'; ++i) {
-        count++;
+void str_copy(const char *src, char *dest) {
+    int j = 0;
+    for (int i = 0; src[i] != '\0'; ++i) {
+        dest[j++] = src[i];
     }
-    return count;
+    dest[j] = '\0';
 }
 
 void test() {
+    char src[] = "hello world";
     const int SIZE = 100;
-    char *str = (char *) malloc(sizeof(char) * SIZE);
-    strcpy(str, "abc123");
-    assert(strlen(str) == length(str));
-
-    strcpy(str, "123456789");
-    assert(strlen(str) == 9);
-
-    strcpy(str, "");
-    assert(strlen(str) == 0);
+    char *dest = (char *) malloc(sizeof(char) * SIZE);
+    str_copy(src, dest);
+    assert(strcmp(src, dest) == 0);
 }
 
 int main() {
