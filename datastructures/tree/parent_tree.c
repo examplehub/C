@@ -33,12 +33,22 @@ void printTree(const PTree *pTree) {
     }
 }
 
+ElemType searchParent(PTree *tree, ElemType target) {
+    for (int i = 0; i < tree->size; ++i) {
+        if (tree->nodes[i].data == target) {
+            return tree->nodes[tree->nodes[i].parent].data;
+        }
+    }
+    return '\0'; /* not found */
+}
+
 void test() {
     PTree tree;
     int size;
     printf("Input the number of nodes of tree:");
     scanf("%d", &size);
     initTree(&tree, size);
+    assert(searchParent(&tree, 'B') == 'A');
     printTree(&tree);
 }
 
