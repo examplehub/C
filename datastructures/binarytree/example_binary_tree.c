@@ -32,22 +32,24 @@ void inOrder(Node *root) {
     }
 }
 
+/**
+ * Create a new node with given data.
+ * @param data the data store at node.
+ * @return new node.
+ */
+Node *createNode(int data) {
+    Node *newNode = (malloc(sizeof(Node)));
+    newNode->data = data;
+    return newNode;
+}
+
 void test() {
     /* see images/example_binary_tree.png */
-    Node *root = malloc(sizeof(Node));
-    root->data = 1;
-
-    Node *node2 = malloc(sizeof(Node));
-    node2->data = 2;
-
-    Node *node3 = malloc(sizeof(Node));
-    node3->data = 3;
-
-    Node *node4 = malloc(sizeof(Node));
-    node4->data = 4;
-
-    Node *node5 = malloc(sizeof(Node));
-    node5->data = 5;
+    Node *root = createNode(1);
+    Node *node2 = createNode(2);
+    Node *node3 = createNode(3);
+    Node *node4 = createNode(4);
+    Node *node5 = createNode(5);
 
     root->left = node2;
     root->right = node3;
