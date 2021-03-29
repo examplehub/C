@@ -86,7 +86,6 @@ void test() {
 
     inOrder(root);
     for (int i = 0; i < SIZE - 1; ++i) {
-        printf("%d\t", RESULT_OF_IN_ORDER[i]);
         assert(RESULT_OF_IN_ORDER[i] < RESULT_OF_IN_ORDER[i + 1]);
     }
 }
