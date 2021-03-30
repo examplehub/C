@@ -60,7 +60,27 @@ int insertBST(Node *root, ElemType key) {
     }
 }
 
+/**
+ * Search a key at binary search tree.
+ * @param root the root of binary search tree.
+ * @param key the key value to be searched.
+ * @return 1 if search successfully, otherwise 0 returned.
+ */
+int searchBST(Node *root, int key) {
+    if (root == NULL) {
+        return 0;
+    }
+    if (root->data == key) {
+        return 1;
+    } else if (key < root->data) {
+        return searchBST(root->left, key);
+    } else {
+        return searchBST(root->right, key);
+    }
+}
+
 int count = 0;
+
 void inOrder(Node *root) {
     if (root != NULL) {
         inOrder(root->left);
@@ -88,6 +108,11 @@ void test() {
     for (int i = 0; i < SIZE - 1; ++i) {
         assert(RESULT_OF_IN_ORDER[i] < RESULT_OF_IN_ORDER[i + 1]);
     }
+
+    for (int i = 0; i < SIZE; ++i) {
+        assert(searchBST(root, nums[i]) == 1);
+    }
+    assert(searchBST(root, 666) == 0);
 }
 
 int main() {
