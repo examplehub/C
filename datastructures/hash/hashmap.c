@@ -15,10 +15,19 @@ typedef struct HashMap {
     int size;
 } HashMap;
 
+/**
+ * Calculate the hash address of key.
+ * @param key the key.
+ * @return hash address of key.
+ */
 int hashCode(int key) {
     return key % MAX_SIZE;
 }
 
+/**
+ * Init hash map.
+ * @param hashMap the hashMap to be inited.
+ */
 void init(HashMap *hashMap) {
     for (int i = 0; i < MAX_SIZE; ++i) {
         hashMap->array[i] = NULL;
@@ -26,6 +35,12 @@ void init(HashMap *hashMap) {
     hashMap->size = 0;
 }
 
+/**
+ * Put key, value to hashmap.
+ * @param hashMap the hashmap.
+ * @param key the key.
+ * @param value the value.
+ */
 void put(HashMap *hashMap, int key, int value) {
     int hash = hashCode(key);
     while (hashMap->array[hash] != NULL && hashMap->array[hash]->key != key) {
@@ -34,7 +49,7 @@ void put(HashMap *hashMap, int key, int value) {
     bool exists = hashMap->array[hash] != NULL && hashMap->array[hash]->key == key;
     if (exists) {
         hashMap->array[hash]->value = value;
-    }else{
+    } else {
         Item *newItem = malloc(sizeof(Item));
         newItem->key = key;
         newItem->value = value;
@@ -43,6 +58,12 @@ void put(HashMap *hashMap, int key, int value) {
     }
 }
 
+/**
+ * Delete a element at hashmap with given key.
+ * @param hashMap the hashmap.
+ * @param key the key value to be deleted.
+ * @return value of given key of hashmap.
+ */
 int delete(HashMap *hashMap, int key) {
     int hash = hashCode(key);
     while (hashMap->array[hash] != NULL) {
@@ -58,6 +79,12 @@ int delete(HashMap *hashMap, int key) {
     return -1;
 }
 
+/**
+ * Search a value of hashmap with given key.
+ * @param hashMap the hashmap.
+ * @param key the the of hashmap.
+ * @return the value of given key.
+ */
 int get(HashMap *hashMap, int key) {
     int hash = hashCode(key);
     while (hashMap->array[hash] != NULL) {
@@ -69,10 +96,19 @@ int get(HashMap *hashMap, int key) {
     return -1;
 }
 
+/**
+ * Return size of hashmap.
+ * @param hashMap the hashmap.
+ * @return size of hashmap.
+ */
 int size(HashMap *hashMap) {
     return hashMap->size;
 }
 
+/**
+ * Print hashmap key and value.
+ * @param hashMap the hashmap.
+ */
 void printHashMap(HashMap *hashMap) {
     for (int i = 0; i < MAX_SIZE; ++i) {
         if (hashMap->array[i] != NULL) {
