@@ -12,13 +12,13 @@ int search(const int *arr, int key, int low, int high) {
     if (low > high) {
         return -1;
     }
-    int mid = (low + high) / 2;
+    int mid = low + (high - low) / 2;
     if (key == arr[mid]) {
         return mid;
     } else if (key > arr[mid]) {
         return search(arr, key, mid + 1, high);
     } else {
-        return search(arr, key, 0, mid - 1);
+        return search(arr, key, low, mid - 1);
     }
 }
 

@@ -11,7 +11,7 @@ int search(const int *arr, int len, int key) {
     int low = 0;
     int high = len - 1;
     while (low <= high) {
-        int mid = (low + high) >> 1;
+        int mid = low + (high - low) / 2;
         if (key == arr[mid]) {
             return mid;
         } else if (key > arr[mid]) {
