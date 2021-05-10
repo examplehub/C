@@ -1,5 +1,4 @@
 #include <assert.h>
-#include <stdbool.h>
 #include <time.h>
 #include <stdlib.h>
 
