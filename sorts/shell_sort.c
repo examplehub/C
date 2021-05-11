@@ -10,7 +10,9 @@ void shellSort(int *array, int length) {
             for (j = i - gap; j >= 0 && key < array[j]; j -= gap) {
                 array[j + gap] = array[j];
             }
-            array[j + gap] = key;
+            if (j != i - gap) {
+                array[j + gap] = key;
+            }
         }
     }
 }
