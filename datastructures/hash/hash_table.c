@@ -1,5 +1,4 @@
 #include <assert.h>
-#include <stdio.h>
 #define MAX 13
 
 
