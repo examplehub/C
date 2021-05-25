@@ -10,10 +10,6 @@ typedef struct Stack {
     int top;
 } Stack;
 
-void initStack(Stack *pStack);
-
-bool isEmpty();
-
 void initStack(Stack *pStack) {
     pStack->base = malloc(MAX_SIZE * sizeof(ElemType));
     pStack->top = -1;
