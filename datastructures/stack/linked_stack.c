@@ -82,7 +82,7 @@ ElemType pop(LinkedStack *pStack) {
  * @return top element of stack.
  */
 ElemType peek(LinkedStack stack) {
-    if (stack.size == 0) {
+    if (isEmpty(stack)) {
         perror("Can't peek from empty stack");
     }
     return stack.top->data;

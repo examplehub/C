@@ -10,45 +10,79 @@ typedef struct Stack {
     int top;
 } Stack;
 
-void initStack(Stack *pStack);
-
-bool isEmpty();
-
+/**
+ * Init stack.
+ * @param pStack
+ */
 void initStack(Stack *pStack) {
     pStack->base = malloc(MAX_SIZE * sizeof(ElemType));
     pStack->top = -1;
 }
 
-bool isEmpty(Stack stack) {
-    return stack.top == -1;
+/**
+ * Test if the stack is empty or not.
+ * @param pStack the stack to be checked.
+ * @return true if the stack is empty, otherwise fasle.
+ */
+bool isEmpty(Stack *pStack) {
+    return pStack->top == -1;
 }
 
-bool isFull(Stack stack){
-    return stack.top == MAX_SIZE - 1;
+/**
+ * Test if the stack is full.
+ * @param pStack the stack to be checked.
+ * @return true if the stack contains no elements.
+ */
+bool isFull(Stack *pStack){
+    return pStack->top + 1 == MAX_SIZE;
 }
 
-int length(Stack stack) {
-    return stack.top + 1;
+/**
+ * Returns the count of numbers of stack.
+ * @param pStack the stack to be calculated.
+ * @return size of number of stack.
+ */
+int length(Stack *pStack) {
+    return pStack->top + 1;
 }
 
+/**
+ * Clear all elements of stack.
+ * @param pStack the stack to be cleared.
+ */
 void clear(Stack *pStack) {
     pStack->top = -1;
 }
 
+/**
+ * Destroy the stack memory allocated.
+ * @param pStack the stack will be destroy.
+ */
 void destroy(Stack *pStack) {
     free(pStack->base);
     pStack->top = -1;
 }
 
+/**
+ * Remove element from the top of stack.
+ * @param pStack the stack contains elements.
+ * @return the element at the top of stack.
+ */
 ElemType pop(Stack *pStack){
-    if (isEmpty(*pStack)){
+    if (isEmpty(pStack)){
         perror("pop from empty stack.");
     }
     return pStack->base[pStack->top--];
 }
 
+/**
+ * Add element to the top of stack.
+ * @param pStack the stack contains elements.
+ * @param elem the element to added.
+ * @return true if pushed, otherwise false.
+ */
 bool push(Stack *pStack, ElemType elem){
-    if (isFull(*pStack)){
+    if (isFull(pStack)){
         perror("can't push full stack.");
         return false;
     }
@@ -56,30 +90,35 @@ bool push(Stack *pStack, ElemType elem){
     return true;
 }
 
-ElemType peek(Stack stack) {
-    if (isEmpty(stack)) {
+/**
+ * Get the element at the top of stack.
+ * @param pStack the stack.
+ * @return the stack contains elements
+ */
+ElemType peek(Stack *pStack) {
+    if (isEmpty(pStack)) {
         perror("can't peek from empty stack.");
     }
-    return stack.base[stack.top];
+    return pStack->base[pStack->top];
 }
 
 void test() {
     Stack stack;
     initStack(&stack);
-    assert(isEmpty(stack));
-    assert(length(stack) == 0);
+    assert(isEmpty(&stack));
+    assert(length(&stack) == 0);
 
     for (int i = 1; i <= 5; ++i) {
         push(&stack, i);
     }
-    assert(peek(stack) == 5);
-    assert(length(stack) == 5);
+    assert(peek(&stack) == 5);
+    assert(length(&stack) == 5);
     for (int i = 5; i >= 1; --i) {
         assert(pop(&stack) == i);
     }
 
     clear(&stack);
-    assert(isEmpty(stack));
+    assert(isEmpty(&stack));
 
     destroy(&stack);
 }
