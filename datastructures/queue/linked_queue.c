@@ -74,6 +74,10 @@ ElemType deQueue(LinkedQueue *queue) {
     return retValue;
 }
 
+/**
+ * Remove all elements of queue.
+ * @param queue the queue pointer.
+ */
 void clearQueue(LinkedQueue *queue) {
     if (!isEmpty(queue)) {
         struct Node *cur = queue->front;
@@ -84,11 +88,15 @@ void clearQueue(LinkedQueue *queue) {
             next = next->next;
         }
         free(cur);
-        queue->front = queue->rear = NULL;
-        queue->size = 0;
     }
+    queue->front = queue->rear = NULL;
+    queue->size = 0;
 }
 
+/**
+ * Print all elements of queue.
+ * @param queue
+ */
 void printQueue(LinkedQueue *queue) {
     struct Node *temp = queue->front;
     while (temp != NULL) {
