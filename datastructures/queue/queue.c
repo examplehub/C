@@ -11,25 +11,50 @@ typedef struct Queue {
     int rear; /* rear pointer of queue */
 } Queue;
 
+/**
+ * Init queue.
+ * @param pQueue the queue pointer.
+ */
 void initQueue(Queue *pQueue) {
     pQueue->base = malloc(sizeof(ElemType) * MAX_SIZE);
     pQueue->front = pQueue->rear = 0;
 }
 
-bool isEmpty(Queue queue) {
-    return queue.front == queue.rear;
+/**
+ * Test if the queue is empty.
+ * @param queue
+ * @return true if the queue is empty, otherwise false.
+ */
+bool isEmpty(Queue *pQueue) {
+    return pQueue->front == pQueue->rear;
 }
 
-bool isFull(Queue queue) {
-    return (queue.rear + 1) % MAX_SIZE == queue.front;
+/**
+ * Test if the queue is full.
+ * @param pQueue the queue pointer.
+ * @return true if the queue is full, otherwise false.
+ */
+bool isFull(Queue *pQueue) {
+    return (pQueue->rear + 1) % MAX_SIZE == pQueue->front;
 }
 
-int length(Queue queue) {
-    return (queue.rear - queue.front + MAX_SIZE) % MAX_SIZE;
+/**
+ * Returns the count number of the queue.
+ * @param pQueue the queue pointer.
+ * @return length of queue.
+ */
+int length(Queue *pQueue) {
+    return (pQueue->rear - pQueue->front + MAX_SIZE) % MAX_SIZE;
 }
 
+/**
+ *
+ * @param pQueue the queue pointer of queue.
+ * @param elem the element will add to queue.
+ * @return true if add successfully, otherwise false.
+ */
 bool enqueue(Queue *pQueue, ElemType elem) {
-    if (isFull(*pQueue)) {
+    if (isFull(pQueue)) {
         perror("can't enqueue to full queue");
         return false;
     }
@@ -38,8 +63,13 @@ bool enqueue(Queue *pQueue, ElemType elem) {
     return true;
 }
 
+/**
+ * Remove element from queue.
+ * @param pQueue the pointer of queue.
+ * @return the element at front of queue.
+ */
 ElemType dequeue(Queue *pQueue) {
-    if (isEmpty(*pQueue)) {
+    if (isEmpty(pQueue)) {
         perror("can't dequeue from empty queue.");
     }
     ElemType elem = pQueue->base[pQueue->front];
@@ -47,17 +77,29 @@ ElemType dequeue(Queue *pQueue) {
     return elem;
 }
 
-void printQueue(Queue queue) {
-    for (int i = queue.front; i != queue.rear; i = (i + 1) % MAX_SIZE) {
-        printf("%d\t", queue.base[i]);
+/**
+ * Print all elements of queue.
+ * @param pQueue the queue pointer.
+ */
+void printQueue(Queue *pQueue) {
+    for (int i = pQueue->front; i != pQueue->rear; i = (i + 1) % MAX_SIZE) {
+        printf("%d\t", pQueue->base[i]);
     }
     printf("\n");
 }
 
+/**
+ * Remove all elements of queue without free memory.
+ * @param pQueue the pointer of queue.
+ */
 void clear(Queue *pQueue) {
     pQueue->rear = pQueue->front = 0;
 }
 
+/**
+ * Remove all elements of queue and free memory.
+ * @param pQueue the pointer of queue.
+ */
 void destroy(Queue *pQueue) {
     pQueue->rear = pQueue->front = 0;
     free(pQueue->base);
@@ -66,34 +108,34 @@ void destroy(Queue *pQueue) {
 void test() {
     Queue queue;
     initQueue(&queue);
-    assert(isEmpty(queue));
-    assert(length(queue) == 0);
+    assert(isEmpty(&queue));
+    assert(length(&queue) == 0);
 
     for (int i = 1; i <= 4; ++i) {
         enqueue(&queue, i);
     }
-    assert(isFull(queue));
-    assert(length(queue) == 4);
-    printQueue(queue); /* output: 1 2 3 4 */
+    assert(isFull(&queue));
+    assert(length(&queue) == 4);
+    printQueue(&queue); /* output: 1 2 3 4 */
 
     assert(dequeue(&queue) == 1);
     assert(dequeue(&queue) == 2);
-    printQueue(queue); /* output: 3	4 */
+    printQueue(&queue); /* output: 3	4 */
 
     enqueue(&queue, 666);
     enqueue(&queue, 888);
-    printQueue(queue); /* 3 4 666 888 */
+    printQueue(&queue); /* 3 4 666 888 */
 
     assert(dequeue(&queue) == 3);
     assert(dequeue(&queue) == 4);
     assert(dequeue(&queue) == 666);
 
-    assert(length(queue) == 1);
-    printQueue(queue); /* 888 */
+    assert(length(&queue) == 1);
+    printQueue(&queue); /* 888 */
 
     clear(&queue);
-    assert(isEmpty(queue));
-    assert(length(queue) == 0);
+    assert(isEmpty(&queue));
+    assert(length(&queue) == 0);
 
     destroy(&queue);
 }
