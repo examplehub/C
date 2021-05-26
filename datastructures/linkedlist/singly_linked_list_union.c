@@ -16,32 +16,43 @@ typedef struct Node {
  * @return header pointer of SinglyLinkedList.
  */
 Node *init() {
-    Node *header = malloc(sizeof(Node));
-    if (header != NULL) {
-        header->next = NULL;
-        header->length = 0;
+    Node *head = malloc(sizeof(Node));
+    if (head != NULL) {
+        head->next = NULL;
+        head->length = 0;
     }
-    return header;
+    return head;
 }
 
-void insertOrder(Node *root, ElemType elem) {
+/**
+ * Insert element to sorted singly linked list always is sorted.
+ * @param head the head pointer
+ * @param elem the element to be inserted.
+ */
+void insertOrder(Node *head, ElemType elem) {
     Node *newNode = malloc(sizeof(Node));
     newNode->data = elem;
-    Node *temp = root;
+    Node *temp = head;
     while (temp != NULL && temp->next != NULL && elem > temp->next->data) {
         temp = temp->next;
     }
     newNode->next = temp->next;
     temp->next = newNode;
-    root->length++;
+    head->length++;
 }
 
-void insertNth(Node *root, int index, ElemType elem) {
-    if (index < 0 || index > root->length) {
-        perror("invalid insertion index");
+/**
+ * Insert a element to given position of singly linked list.
+ * @param head the head pointer of singly linked list.
+ * @param pos the position inserted.
+ * @param elem the element inserted.
+ */
+void insertNth(Node *head, int pos, ElemType elem) {
+    if (pos < 1 || pos > head->length + 1) {
+        perror("invalid insertion position");
     }
-    Node *temp = root;
-    for (int i = 0; i < index; ++i) {
+    Node *temp = head;
+    for (int i = 1; i < pos; ++i) {
         temp = temp->next;
     }
 
@@ -49,28 +60,38 @@ void insertNth(Node *root, int index, ElemType elem) {
     newNode->data = elem;
     newNode->next = temp->next;
     temp->next = newNode;
-    root->length++;
+    head->length++;
 }
 
-ElemType deleteNth(Node *root, int index) {
-    if (index < 0 || index > root->length - 1) {
-        perror("invalid delete index");
+/**
+ * Delete a element at the given position.
+ * @param head the pointer of singly linked list.
+ * @param pos the position of element to be deleted.
+ * @return deleted element.
+ */
+ElemType deleteNth(Node *head, int pos) {
+    if (pos < 1 || pos > head->length) {
+        perror("invalid delete position");
     }
-    Node *temp = root;
-    for (int i = 0; i < index; ++i) {
+    Node *temp = head;
+    for (int i = 1; i < pos; ++i) {
         temp = temp->next;
     }
     Node *destroy = temp->next;
     ElemType data = destroy->data;
     temp->next = temp->next->next;
     free(destroy);
-    root->length--;
+    head->length--;
     return data;
 }
 
-void printSinglyLinkedList(Node *root) {
-    Node *temp = root->next;
-    for (int i = 1; i <= root->length; ++i) {
+/**
+ * Print all elements at singly linked list.
+ * @param head
+ */
+void printSinglyLinkedList(Node *head) {
+    Node *temp = head->next;
+    for (int i = 1; i <= head->length; ++i) {
         printf("%d\t", temp->data);
         temp = temp->next;
     }
@@ -78,32 +99,30 @@ void printSinglyLinkedList(Node *root) {
 }
 
 void test() {
-    Node *root = init();
+    Node *head = init();
     for (int i = 1; i <= 5; i += 2) {
-        insertOrder(root, i);
+        insertOrder(head, i);
     }
     for (int i = 0; i <= 4; i += 2) {
-        insertOrder(root, i);
+        insertOrder(head, i);
     }
-    Node *temp = root->next;
-    for (int i = 1; i <= root->length - 1; ++i) {
+    Node *temp = head->next;
+    for (int i = 1; i <= head->length - 1; ++i) {
         assert(temp->data <= temp->next->data);
     }
-    printSinglyLinkedList(root); /* output: 0	1	2	3	4	5 */
+    printSinglyLinkedList(head); /* output: 0	1	2	3	4	5 */
 
-    root = init(); /* init new linked list */
-    for (int i = 0; i <= 3; ++i) {
-        insertNth(root, i, i + 1);
+    head = init(); /* init new linked list */
+    for (int i = 1; i <= 3; ++i) {
+        insertNth(head, i, i);
     }
-    insertNth(root, 0, 0);
-    insertNth(root, 5, 666);
-    printSinglyLinkedList(root); /* output: 0	1	2	3	4	666 */
+    insertNth(head, 1, 111);
+    insertNth(head, 5, 666);
 
-    assert(deleteNth(root, 0) == 0);
-    assert(deleteNth(root, 4) == 666);
-    printSinglyLinkedList(root);
-    assert(deleteNth(root, 2) == 3);
-    printSinglyLinkedList(root); /* output: 1	2	4 */
+    assert(deleteNth(head, 1) == 111);
+    assert(deleteNth(head, 4) == 666);
+    assert(deleteNth(head, 2) == 2);
+    printSinglyLinkedList(head); /* output: 1   3 */
 }
 
 int main() {
