@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <stdbool.h>
 
 typedef int ElemType;
 typedef struct Node {
@@ -98,6 +99,51 @@ void printSinglyLinkedList(Node *head) {
     printf("\n");
 }
 
+/**
+ * Returns the count number of singly linked list.
+ * @param head the head pointer of singly linked list.
+ * @return the count number of singly linked list.
+ */
+int size(Node *head) {
+    return head->length;
+}
+
+/**
+ * Test if the singly linked list is empty.
+ * @param head the head pointer of singly linked list.
+ * @return true if singly linked list contains no elements, otherwise true.
+ */
+bool isEmpty(Node *head) {
+    return head->length == 0;
+}
+
+/**
+ * Clear all elements of singly linked list.
+ * @param head the head pointer of singly linked list.
+ */
+void clear(Node *head) {
+    Node *cur = head->next;
+    while (cur != NULL) {
+        Node *next = cur->next;
+        free(cur);
+        cur = next;
+    }
+    head->next = NULL;
+    head->length = 0;
+}
+
+/**
+ * Destroy singly linked list.
+ * @param head
+ */
+void destroy(Node *head) {
+    while (head != NULL) {
+        Node *cur = head->next;
+        free(head);
+        head = cur;
+    }
+}
+
 void test() {
     Node *head = init();
     for (int i = 1; i <= 5; i += 2) {
@@ -106,6 +152,7 @@ void test() {
     for (int i = 0; i <= 4; i += 2) {
         insertOrder(head, i);
     }
+    assert(size(head) == 6);
     Node *temp = head->next;
     for (int i = 1; i <= head->length - 1; ++i) {
         assert(temp->data <= temp->next->data);
@@ -123,6 +170,10 @@ void test() {
     assert(deleteNth(head, 4) == 666);
     assert(deleteNth(head, 2) == 2);
     printSinglyLinkedList(head); /* output: 1   3 */
+
+    clear(head);
+    assert(isEmpty(head));
+    destroy(head);
 }
 
 int main() {
