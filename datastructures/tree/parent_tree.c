@@ -1,6 +1,4 @@
-#include <stdio.h>
 #include <assert.h>
-#include <stdlib.h>
 
 #define MAX_SIZE 100
 typedef char ElemType;
@@ -11,31 +9,18 @@ typedef struct TNode {
 
 typedef struct PTree {
     TNode nodes[MAX_SIZE];
-    int root; /* the index of root node in array */
+    int root; /* the index of root node in array, default 0 */
     int size; /* the number of nodes in tree */
 } PTree;
 
-void initTree(PTree *pTree, int size) {
-    pTree->size = size;
-    printf("Input node's data and parent index\n");
-    pTree->root = 0; /* default store root node at 0 index */
-    for (int i = 0; i < size; ++i) {
-        getchar();
-        scanf("%c %d", &pTree->nodes[i].data, &pTree->nodes[i].parent);
-    }
-}
-
-void printTree(const PTree *pTree) {
-    printf("index\tvalue\tp_index\tp_value\n");
-    for (int i = 0; i < pTree->size; ++i) {
-        printf("%d\t%c\t%d\t%c\n", i, pTree->nodes[i].data,
-               pTree->nodes[i].parent, pTree->nodes[pTree->nodes[i].parent].data);
-    }
-}
 
 ElemType searchParent(PTree *tree, ElemType target) {
+
     for (int i = 0; i < tree->size; ++i) {
         if (tree->nodes[i].data == target) {
+            if (tree->nodes[i].parent == -1) {
+                return '\0';
+            }
             return tree->nodes[tree->nodes[i].parent].data;
         }
     }
@@ -43,17 +28,43 @@ ElemType searchParent(PTree *tree, ElemType target) {
 }
 
 void test() {
-    PTree tree;
-    int size;
-    printf("Input the number of nodes of tree:");
-    scanf("%d", &size);
-    initTree(&tree, size);
-    assert(searchParent(&tree, 'B') == 'A');
-    printTree(&tree);
+    //A(0) B(1) C(2) D(3) E(4) F(5) G(6) H(7) I(8) J(9) K(10)
+    PTree tree = {
+            .nodes = {
+                    {'A', -1},
+                    {'B', 0},
+                    {'C', 0},
+                    {'D', 0},
+                    {'E', 1},
+                    {'F', 1},
+                    {'G', 2},
+                    {'H', 3},
+                    {'I', 3},
+                    {'J', 5},
+                    {'K', 6},
+            },
+            .root = 0,
+            .size = 11
+    };
+    char data[][2] = {
+            {'A', '\0'},
+            {'B', 'A'},
+            {'C', 'A'},
+            {'D', 'A'},
+            {'E', 'B'},
+            {'F', 'B'},
+            {'G', 'C'},
+            {'H', 'D'},
+            {'I', 'D'},
+            {'J', 'F'},
+            {'K', 'G'}
+    };
+    for (int i = 0, size = sizeof(data) / sizeof(data[0]); i < size; ++i) {
+        assert(searchParent(&tree, data[i][0]) == data[i][1]);
+    }
 }
 
 int main() {
     test();
     return 0;
 }
-
