@@ -1,5 +1,4 @@
 #include <assert.h>
-#include <stdbool.h>
 
 int reverse(int number) {
     int reversed = 0;

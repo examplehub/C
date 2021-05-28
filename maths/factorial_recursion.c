@@ -1,5 +1,4 @@
 #include <assert.h>
-#include <stdio.h>
 
 /**
  * Return the factorial of a given number using recursion.
@@ -17,8 +16,7 @@ void test() {
                             {3, 6},
                             {4, 24},
                             {5, 120}};
-    assert(sizeof(testNumbers) / sizeof(testNumbers[0]) == 6);
-    for (int i = 0; i < sizeof(testNumbers) / sizeof(testNumbers[0]); ++i) {
+    for (int i = 0, len = sizeof(testNumbers) / sizeof(testNumbers[0]); i < len; ++i) {
         assert(factorial(testNumbers[i][0]) == testNumbers[i][1]);
     }
 }

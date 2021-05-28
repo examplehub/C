@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stdlib.h>
 
 /**
  * Calculate the greatest common divisor of two numbers.
@@ -8,7 +9,7 @@
  */
 int gcd(int a, int b) {
     if (a == 0 || b == 0) {
-        return a == 0 ? b : a;
+        return abs(a - b);
     }
     int t = 1;
     while (t != 0) {
