@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stdlib.h>
 
 /**
  * Sum of digits of a number.
@@ -6,7 +7,7 @@
  * @return sum of digits of given number.
  */
 int sumOfDigits(int number) {
-    number = number < 0 ? -number : number;
+    number = abs(number);
     int sum = 0;
     while (number != 0) {
         sum += number % 10;

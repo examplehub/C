@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stdlib.h>
 
 /**
  * Sum of digits of a number using recursion.
@@ -6,7 +7,7 @@
  * @return sum of digits of given number.
  */
 int sumOfDigits(int number) {
-    number = number < 0 ? -number : number;
+    number = abs(number);
     return number < 10 ? number : number % 10 + sumOfDigits(number / 10);
 }
 

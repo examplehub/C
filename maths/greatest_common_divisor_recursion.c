@@ -1,5 +1,5 @@
 #include <assert.h>
-
+#include <stdlib.h>
 /**
  * Calculate the greatest common divisor of two numbers using recursion.
  * @param a the first number.
@@ -7,11 +7,7 @@
  * @return the greatest common divisor of given two numbers.
  */
 int gcd(int a, int b) {
-    if (a == 0 || b == 0) {
-        return a == 0 ? b : a;
-    } else {
-        return gcd(b, a % b);
-    }
+    return a == 0 || b == 0 ? abs(a - b) : gcd(b, a % b);
 }
 
 void test() {
