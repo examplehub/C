@@ -24,11 +24,11 @@ void init(ArrayList *plist) {
 
 /**
  * Test if arraylist is empty or not.
- * @param list the list to be checked.
+ * @param pList the pList to be checked.
  * @return true if arraylist is empty, otherwise false.
  */
-bool isEmpty(ArrayList list) {
-    return list.size == 0;
+bool isEmpty(ArrayList *pList) {
+    return pList->size == 0;
 }
 
 /**
@@ -63,10 +63,9 @@ bool insertNth(ArrayList *plist, int index, ElemType element) {
         growCapacity(plist);
     }
     for (int i = plist->size - 1; i >= index; --i) {
-        *(plist->base + i + 1) = *(plist->base + i);
+        plist->base[i + 1] = plist->base[i];
     }
-    *(plist->base + index) = element;
-
+    plist->base[index] = element;
     plist->size++;
     return true;
 }
@@ -102,9 +101,9 @@ ElemType deleteNth(ArrayList *plist, int index) {
         perror("invalid deletion index");
     }
 
-    ElemType deletedElem = *(plist->base + index);
+    ElemType deletedElem = plist->base[index];
     for (int i = index; i < plist->size - 1; i++) {
-        *(plist->base + i) = *(plist->base + i + 1);
+        plist->base[i] = plist->base[i + 1];
     }
     plist->size--;
     return deletedElem;
@@ -140,39 +139,39 @@ ElemType set(ArrayList *plist, int index, ElemType newValue) {
         perror("invalid update index");
     }
     ElemType oldValue = *(plist->base + index);
-    *(plist->base + index) = newValue;
+    plist->base[index] = newValue;
     return oldValue;
 }
 
 /**
  * Get an element at special index of arraylist.
- * @param list the list store elements.
+ * @param pList the pList store elements.
  * @param index the special index of arraylist.
  * @return the element at special index.
  */
-ElemType get(ArrayList list, int index) {
-    if (index < 0 || index > list.size - 1) {
+ElemType get(ArrayList *pList, int index) {
+    if (index < 0 || index > pList->size - 1) {
         perror("invalid get index");
     }
-    return *(list.base + index);
+    return pList->base[index];
 }
 
 /**
  * Return the number of elements at arraylist.
- * @param list the list store elements.
+ * @param pList the pList store elements.
  * @return the number of elements at arraylist.
  */
-int size(ArrayList list) {
-    return list.size;
+int size(ArrayList *pList) {
+    return pList->size;
 }
 
 /**
  * Travel elements of arraylist.
  * @param list the list store elements.
  */
-void travel(ArrayList list) {
-    for (int i = 0; i < list.size; i++) {
-        printf("%d\t", *(list.base + i));
+void travel(ArrayList *pList) {
+    for (int i = 0; i < pList->size; i++) {
+        printf("%d\t", pList->base[i]);
     }
     printf("\n");
 }
@@ -226,25 +225,25 @@ void merge(ArrayList *plistA, ArrayList *plistB, ArrayList *plistC) {
 void test() {
     ArrayList list;
     init(&list);
-    assert(isEmpty(list));
+    assert(isEmpty(&list));
 
     for (int i = 0; i < 5; ++i) {
         insertNth(&list, i, i + 1);
     }
     insertHead(&list, 0);
     insertTail(&list, 6);
-    assert(size(list) == 7);
+    assert(size(&list) == 7);
 
     for (int i = 0; i < 7; ++i) {
-        assert(i == get(list, i));
+        assert(i == get(&list, i));
     }
 
-    travel(list); /* output: 0 1 2 3 4 5 6 */
+    travel(&list); /* output: 0 1 2 3 4 5 6 */
     assert(deleteHead(&list) == 0);
     assert(deleteTail(&list) == 6);
-    travel(list); /* output: 1 2 3 4 5 */
+    travel(&list); /* output: 1 2 3 4 5 */
     assert(deleteNth(&list, 2) == 3);
-    travel(list); /* output: 1 2 4 5 */
+    travel(&list); /* output: 1 2 4 5 */
 
     clear(&list);
     destroy(&list);
@@ -260,15 +259,15 @@ void testMerge()
         insertNth(&listA, j, i);
         insertNth(&listB, j, i + 1);
     }
-    travel(listA); /* output: 1	3	5	7	9 */
-    travel(listB); /* output: 2	4	6	8	10 */
+    travel(&listA); /* output: 1	3	5	7	9 */
+    travel(&listB); /* output: 2	4	6	8	10 */
 
     ArrayList listC;
     init(&listC);
     merge(&listA, &listB, &listC);
-    travel(listC); /* output: 1	   2	3	4	5	6	7	8	9	10 */
+    travel(&listC); /* output: 1	   2	3	4	5	6	7	8	9	10 */
     for (int i = 0; i < listC.size - 1; ++i) {
-        assert(get(listC, i) <= get(listC, i + 1));
+        assert(get(&listC, i) <= get(&listC, i + 1));
     }
 }
 
