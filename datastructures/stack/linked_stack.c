@@ -24,12 +24,12 @@ void initStack(LinkedStack *pStack) {
 }
 
 /**
- * Test if the stack is empty or not.
- * @param stack the stack to be test.
- * @return true if stack is empty, otherwise false.
+ * Test if the pStack is empty or not.
+ * @param pStack the pStack to be test.
+ * @return true if pStack is empty, otherwise false.
  */
-bool isEmpty(LinkedStack stack) {
-    return stack.size == 0;
+bool isEmpty(LinkedStack *pStack) {
+    return pStack->size == 0;
 }
 
 /**
@@ -37,8 +37,8 @@ bool isEmpty(LinkedStack stack) {
  * @param stack the stack contains elements.
  * @return the number of elements at the stack.
  */
-int size(LinkedStack stack) {
-    return stack.size;
+int size(LinkedStack *pStack) {
+    return pStack->size;
 }
 
 /**
@@ -81,19 +81,19 @@ ElemType pop(LinkedStack *pStack) {
  * @param stack the stack.
  * @return top element of stack.
  */
-ElemType peek(LinkedStack stack) {
-    if (isEmpty(stack)) {
+ElemType peek(LinkedStack *pStack) {
+    if (isEmpty(pStack)) {
         perror("Can't peek from empty stack");
     }
-    return stack.top->data;
+    return pStack->top->data;
 }
 
 /**
  * Print stack elements.
  * @param stack the stack to be printed.
  */
-void printStack(LinkedStack stack) {
-    Node *temp = stack.top;
+void printStack(LinkedStack *pStack) {
+    Node *temp = pStack->top;
     while (temp != NULL) {
         printf("%d\t", temp->data);
         temp = temp->next;
@@ -102,28 +102,28 @@ void printStack(LinkedStack stack) {
 }
 
 void test() {
-    LinkedStack linkedStack;
-    initStack(&linkedStack);
-    assert(isEmpty(linkedStack));
-    assert(size(linkedStack) == 0);
+    LinkedStack stack;
+    initStack(&stack);
+    assert(isEmpty(&stack));
+    assert(size(&stack) == 0);
 
     for (int i = 1; i <= 5; ++i) {
-        push(&linkedStack, i);
-        assert(size(linkedStack) == i);
+        push(&stack, i);
+        assert(size(&stack) == i);
     }
-    printStack(linkedStack); /* output: 5	4	3	2	1 */
-    assert(size(linkedStack) == 5);
-    assert(peek(linkedStack) == 5);
+    printStack(&stack); /* output: 5	4	3	2	1 */
+    assert(size(&stack) == 5);
+    assert(peek(&stack) == 5);
 
     for (int i = 5; i >= 1; --i) {
-        assert(size(linkedStack) == i);
-        assert(peek(linkedStack) == i);
-        assert(pop(&linkedStack) == i);
+        assert(size(&stack) == i);
+        assert(peek(&stack) == i);
+        assert(pop(&stack) == i);
     }
 
-    assert(size(linkedStack) == 0);
-    assert(isEmpty(linkedStack));
-    printStack(linkedStack); /* output: */
+    assert(size(&stack) == 0);
+    assert(isEmpty(&stack));
+    printStack(&stack); /* output: */
 }
 
 int main() {
