@@ -10,14 +10,13 @@ void hanoi(int n, char A, char B, char C) {
 }
 
 void test() {
-    /**
-     * output:
+    /*
      * move from A to B
      */
     hanoi(1, 'A', 'B', 'C');
     printf("---------------------\n");
 
-    /**
+    /*
      * move from A to C
      * move from A to B
      * move from C to B
@@ -25,7 +24,7 @@ void test() {
     hanoi(2, 'A', 'B', 'C');
     printf("---------------------\n");
 
-    /**
+    /*
      * move from A to B
      * move from A to C
      * move from B to C
