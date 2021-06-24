@@ -11,9 +11,9 @@ typedef struct {
 
 bool visited[VERTEX_NUM];
 ElemType dfsPath[VERTEX_NUM];
-int idx = 0;
+int count = 0;
 void deepFirstSearch(Graph *g, int start) {
-    dfsPath[idx++] = g->vertex[start];
+    dfsPath[count++] = g->vertex[start];
     visited[start] = true;
     for (int i = 0; i < VERTEX_NUM; ++i) {
         if (g->edge[start][i] == 1 && !visited[i]) {
