@@ -23,11 +23,10 @@ Node *createNode(int data) {
 int depth(Node *root) {
     if (root == NULL) {
         return 0;
-    } else {
-        int leftDepth = depth(root->left);
-        int rightDepth = depth(root->right);
-        return leftDepth > rightDepth ? leftDepth + 1: rightDepth + 1;
     }
+    int leftDepth = depth(root->left);
+    int rightDepth = depth(root->right);
+    return (leftDepth >= rightDepth ? leftDepth : rightDepth) + 1;
 }
 
 void test() {
