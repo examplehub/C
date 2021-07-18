@@ -30,15 +30,14 @@ Node *createNode(int data) {
 bool isSame(Node *root1, Node *root2) {
     if (root1 == NULL && root2 == NULL) {
         return true;
-    } else if (root1 != NULL && root2 != NULL) {
-        if (root1->data == root2->data) {
-            return isSame(root1->left, root2->left) && isSame(root1->right, root2->right);
-        } else {
-            return false;
-        }
-    } else {
+    }
+    if (root1 == NULL || root2 == NULL) {
         return false;
     }
+    if (root1->data != root2->data) {
+        return false;
+    }
+    return isSame(root1->left, root2->left) && isSame(root1->right, root2->right);
 }
 
 
@@ -61,6 +60,7 @@ void test() {
     node5->left = node5->right = NULL;
 
     assert(isSame(root, root));
+    assert(!isSame(root, NULL));
 }
 
 int main() {
