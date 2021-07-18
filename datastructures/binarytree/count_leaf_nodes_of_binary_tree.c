@@ -28,11 +28,11 @@ Node *createNode(int data) {
 int countLeafNodes(Node *root) {
     if (root == NULL) {
         return 0;
-    } else if (root->left == NULL && root->right == NULL) {
-        return 1;
-    } else {
-        return countLeafNodes(root->left) + countLeafNodes(root->right);
     }
+    if (root->left == NULL && root->right == NULL) {
+        return 1;
+    }
+    return countLeafNodes(root->left) + countLeafNodes(root->right);
 }
 
 void test() {
