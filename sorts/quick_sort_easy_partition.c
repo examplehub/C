@@ -2,29 +2,27 @@
 #include <stdlib.h>
 #include <time.h>
 
-void swap(int *arr, int i, int j) {
-    int temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
-}
-
 int partition(int *arr, int low, int high) {
+    int len = high - low + 1;
+    int temp[len];
+    int j = 0;
+    int k = len - 1;
     int pivot = arr[low];
-    while (low < high) {
-        while (low < high && arr[high] >= pivot) {
-            high--;
-        }
-        while (low < high && arr[low] <= pivot) {
-            low++;
-        }
-        if (low < high) {
-            swap(arr, low, high);
-            low++;
-            high--;
+    for (int i = low + 1; i <= high; ++i) {
+        if (arr[i] <= pivot) {
+            temp[j] = arr[i];
+            j++;
+        } else {
+            temp[k] = arr[i];
+            k--;
         }
     }
-    arr[low] = pivot;
-    return low;
+    assert(j == k);
+    temp[j] = pivot;
+    for (int i = 0; i < len; ++i) {
+        arr[low + i] = temp[i];
+    }
+    return low + j; /* return low + k */
 }
 
 void quickSort(int *arr, int low, int high) {
