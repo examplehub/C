@@ -24,6 +24,7 @@ int partition(int *arr, int low, int high) {
         }
     }
     arr[low] = pivot;
+    assert(low >= high);
     return low;
 }
 
@@ -48,6 +49,13 @@ void test() {
         assert(arr[i] <= arr[i + 1]);
     }
     free(arr);
+
+    int numbers[] = {1, 3, 5, 7, 9, 2, 4, 6, 8, 10};
+    int len = sizeof(numbers) / sizeof(numbers[0]);
+    quickSort(numbers, 0, len - 1);
+    for (int i = 0; i < len - 1; ++i) {
+        assert(numbers[i] <= numbers[i + 1]);
+    }
 }
 
 int main() {
